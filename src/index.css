@@ -1,1 +1,51 @@
 @import "tailwindcss";
+
+/* Hide Kit (ConvertKit) Branding and Excess */
+.formkit-powered-by,
+.formkit-guarantee,
+.formkit-header,
+.formkit-subheader,
+.formkit-disclaimer {
+  display: none !important;
+}
+
+/* Ensure the form itself is clean and fits the design */
+.formkit-form {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 auto !important;
+  max-width: 100% !important;
+}
+
+.formkit-submit {
+  width: 100% !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  background-color: #dc2626 !important; /* Tailwind red-600 */
+  color: white !important;
+  padding: 1.25rem !important;
+  border-radius: 0.5rem !important;
+  font-size: 1.25rem !important;
+  transition: all 0.2s !important;
+}
+
+.formkit-submit:hover {
+  background-color: #b91c1c !important; /* Tailwind red-700 */
+  transform: scale(1.02) !important;
+}
+
+.formkit-input {
+  padding: 1rem !important;
+  border: 2px solid #e5e7eb !important;
+  border-radius: 0.5rem !important;
+  font-size: 1.125rem !important;
+  width: 100% !important;
+  margin-bottom: 1rem !important;
+}
+
+.formkit-input:focus {
+  border-color: #dc2626 !important;
+  outline: none !important;
+}

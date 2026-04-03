@@ -1,43 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
-import { CheckCircle, AlertTriangle, ArrowRight, Mail, ShieldCheck, User } from 'lucide-react';
+import { AlertTriangle, ArrowRight, ShieldCheck } from 'lucide-react';
 
 export default function App() {
-  const [firstName, setFirstName] = useState('');
-  const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+  const formContainerRef = useRef<HTMLDivElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (firstName && email) {
-      setSubmitted(true);
+  useEffect(() => {
+    if (formContainerRef.current) {
+      // Clear any existing content
+      formContainerRef.current.innerHTML = '';
+      
+      // Create and append the Kit script
+      const script = document.createElement('script');
+      script.src = 'https://naval-azure.kit.com/39efe9904d/index.js';
+      script.async = true;
+      script.setAttribute('data-uid', '39efe9904d');
+      formContainerRef.current.appendChild(script);
     }
-  };
-
-  if (submitted) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center p-4 font-sans">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="max-w-md w-full text-center space-y-6"
-        >
-          <div className="flex justify-center">
-            <div className="bg-green-100 p-4 rounded-full">
-              <CheckCircle className="w-16 h-16 text-green-600" />
-            </div>
-          </div>
-          <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Success, {firstName}!</h1>
-          <p className="text-lg text-gray-600">
-            The <span className="font-bold text-red-600">Ifenna Headline Generator</span> is being sent to <span className="font-medium">{email}</span> right now.
-          </p>
-          <p className="text-sm text-gray-500">
-            Check your inbox (and spam folder) in the next 2 minutes.
-          </p>
-        </motion.div>
-      </div>
-    );
-  }
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans selection:bg-red-100 selection:text-red-900">
@@ -71,43 +51,19 @@ export default function App() {
                 Who Else Wants To Go From A "Blank Page" To A Scientific, High-Converting Headline In Under 60 Seconds?
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed">
-                Stop the "skull sweat" of writer's block. Let my proprietary software do the heavy lifting for you.
+                Stop the "skull sweat" of writer's block. Let <strong>The Ultimate Headline Generator</strong> do the heavy lifting for you.
               </p>
               
-              {/* 5. Call to Action (The Transaction) */}
-              <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4">
-                <div className="relative">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <input
-                    type="text"
-                    required
-                    placeholder="Enter your first name..."
-                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-lg focus:border-red-600 focus:ring-0 transition-all text-lg"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                  />
+              {/* 5. Call to Action (The Transaction) - Kit Form Replacement */}
+              <div className="max-w-md mx-auto py-4">
+                <div ref={formContainerRef} id="kit-form-container" className="kit-form-minimal">
+                  {/* Kit form will be injected here */}
                 </div>
-                <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <input
-                    type="email"
-                    required
-                    placeholder="Enter your best email address..."
-                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-lg focus:border-red-600 focus:ring-0 transition-all text-lg"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-red-600 hover:bg-red-700 text-white font-black text-xl py-5 rounded-lg shadow-xl shadow-red-200 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3 uppercase tracking-tight"
-                >
-                  Give Me The Software Now! <ArrowRight className="w-6 h-6" />
-                </button>
-                <div className="flex items-center justify-center gap-2 text-xs text-gray-400 font-medium uppercase tracking-widest">
+                
+                <div className="mt-6 flex items-center justify-center gap-2 text-xs text-gray-400 font-medium uppercase tracking-widest">
                   <ShieldCheck className="w-4 h-4" /> 100% Secure. No Spam. Ever.
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </section>
